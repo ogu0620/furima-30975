@@ -1,24 +1,52 @@
-# README
+## users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|  Column          | Type      | Options     |
+| ---------------- | --------- | ----------- |
+|nickname          |string     | null: false |
+|password          |string     | null: false |
+|first_name        |string     | null: false |
+|last_name         |string     | null: false |
+|first_name_kana   |string     | null: false |
+|last_name_kana    |string     | null: false |
+|email             |string     | null: false |
+|year_of_birth     |integer    | null: false |
+|birth_month       |integer    | null: false |
+|birth_day         |integer    | null: false |
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+## items テーブル
 
-* Configuration
+|  Column          | Type     | Options                       |
+| ---------------- | -------- | ----------------------------- |
+|image             |references| null: false                   |
+|product_name      |string    | null: false                   |
+|description       |text      | null: false                   |
+|category          |string    | null: false                   |
+|states            |string    | null: false                   |
+|delivery_fee      |integer   | null: false                   |
+|shipping_area     |string    | null: false                   |
+|shipping_days     |datetime  | null: false                   |
+|price             |integer   | null: false                   |
+|seller            |references| null: false ,foreign_key: true|
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
+## purchase_records テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+|  Column          | Type        | Options                        |
+| ---------------- | ----------- | ------------------------------ |
+|buyer             |references   | null: false , foreign_key: true|
+|purchased_item    |references   | null: false , foreign_key: true|
 
-* Deployment instructions
 
-* ...
+
+## addresses テーブル
+
+|  Column          | Type   | Options     |
+| ---------------- | ------ | ----------- |
+|prefectures       |string  | null: false |
+|municipality      |string  | null: false |
+|house_number      |string  | null: false |
+|building_name     |string  | null: false |
+|phone_number      |integer | null: false |
