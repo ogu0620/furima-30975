@@ -1,17 +1,21 @@
 ## users テーブル
 
-|  Column          | Type      | Options     |
-| ---------------- | --------- | ----------- |
-|nickname          |string     | null: false |
-|password          |string     | null: false |
-|first_name        |string     | null: false |
-|last_name         |string     | null: false |
-|first_name_kana   |string     | null: false |
-|last_name_kana    |string     | null: false |
-|email             |string     | null: false |
-|year_of_birth     |integer    | null: false |
-|birth_month       |integer    | null: false |
-|birth_day         |integer    | null: false |
+|  Column          | Type      | Options                 |
+| ---------------- | --------- | ----------------------- |
+|nickname          |string     | null: false             |
+|encrypted_password|string     | null: false             |
+|first_name        |string     | null: false             |
+|last_name         |string     | null: false             |
+|first_name_kana   |string     | null: false             |
+|last_name_kana    |string     | null: false             |
+|email             |string     | null: false,unique:true |
+|birthday          |date       | null: false             |
+
+
+### Association
+
+- has_many :items
+- has_many :purchase_records
 
 
 
@@ -19,25 +23,34 @@
 
 |  Column          | Type     | Options                       |
 | ---------------- | -------- | ----------------------------- |
-|image             |references| null: false                   |
 |product_name      |string    | null: false                   |
 |description       |text      | null: false                   |
-|category          |string    | null: false                   |
-|states            |string    | null: false                   |
-|delivery_fee      |integer   | null: false                   |
-|shipping_area     |string    | null: false                   |
-|shipping_days     |datetime  | null: false                   |
+|category_id       |integer   | null: false                   |
+|status_id         |integer   | null: false                   |
+|delivery_fee_id   |integer   | null: false                   |
+|prefecture_id     |integer   | null: false                   |
+|shipping_days_id  |integer   | null: false                   |
 |price             |integer   | null: false                   |
-|seller            |references| null: false ,foreign_key: true|
+|user              |references| null: false ,foreign_key: true|
 
+### Association
 
+- belongs_to :users
+- has_one :purchase_records
 
 ## purchase_records テーブル
 
 |  Column          | Type        | Options                        |
 | ---------------- | ----------- | ------------------------------ |
-|buyer             |references   | null: false , foreign_key: true|
-|purchased_item    |references   | null: false , foreign_key: true|
+|user              |references   | null: false , foreign_key: true|
+|item              |references   | null: false , foreign_key: true|
+
+
+### Association
+
+- belongs_to :users
+- belongs_to :items
+- has_one :addresses
 
 
 
@@ -45,8 +58,14 @@
 
 |  Column          | Type   | Options     |
 | ---------------- | ------ | ----------- |
-|prefectures       |string  | null: false |
+|prefecture_id     |integer | null: false |
 |municipality      |string  | null: false |
 |house_number      |string  | null: false |
-|building_name     |string  | null: false |
-|phone_number      |integer | null: false |
+|building_name     |string  |             |
+|phone_number      |string  | null: false |
+|postal_code       |string  | null: false |
+
+
+### Association
+
+- belongs_to :purchase_records
