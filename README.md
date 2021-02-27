@@ -64,7 +64,7 @@
 |building_name     |string        |                                |
 |phone_number      |string        | null: false                    |
 |postal_code       |string        | null: false                    |
-|purchase_record_id|references    | null: false , foreign_key: true|
+|purchase_record   |references    | null: false , foreign_key: true|
 
 
 ### Association
