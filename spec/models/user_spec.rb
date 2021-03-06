@@ -7,6 +7,12 @@ RSpec.describe User, type: :model do
       @user = FactoryBot.create(:user)
     end
 
+    context '新規登録がうまくいく時'do
+    it '新規登録がうまくいく' do
+    expect(@user).to be_valid
+    end
+  end
+
     context '新規登録がうまくいかない時'do
     it 'nicknameが空だと登録できない' do
       
@@ -117,9 +123,18 @@ RSpec.describe User, type: :model do
     it 'ユーザー本名は、全角（漢字、ひらがな、カタカナ）での入力が必須であること' do
       
       @user.last_name = 'ｱｱｱ'
-      @user.first_name = 'ｱｱｱ'
+     
       @user.valid?
       expect(@user.errors.full_messages).to include('Last name is invalid')
+      
+    end
+
+    it 'ユーザー本名は、全角（漢字、ひらがな、カタカナ）での入力が必須であること' do
+      
+     
+      @user.first_name = 'ｱｱｱ'
+      @user.valid?
+     
       expect(@user.errors.full_messages).to include('First name is invalid')
     end
 
