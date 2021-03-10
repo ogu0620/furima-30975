@@ -8,7 +8,7 @@ class User < ApplicationRecord
     validates :nickname
     validates :birthday
   end
- 
+
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{1}+\z/i
   validates :password, format: { with: VALID_PASSWORD_REGEX }
 
@@ -21,4 +21,7 @@ class User < ApplicationRecord
     validates :first_name_kana
     validates :last_name_kana
   end
+
+  has_many :items
+  has_many :purchase_records
 end
