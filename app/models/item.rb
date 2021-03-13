@@ -11,11 +11,11 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
-  validates :image
-  validates :product_name
-  validates :description
+    validates :image
+    validates :product_name
+    validates :description
   end
-  
+
   validates :price, numericality: { only_integer: true }
   validates :price, numericality: { greater_than_or_equal_to: 300 }
   validates :price, numericality: { less_than_or_equal_to: 9_999_999 }
