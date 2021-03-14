@@ -1,5 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, expect: [:index,:show]
+  before_action :set_item,only: [:show,:edit,:update]
+  before_action :set_item_user,only: [:edit,:update]  
+
 
   def index
     @items = Item.order('created_at DESC')
@@ -24,13 +27,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    
 
-    redirect_to action: :index unless current_user.id == @item.user_id
   end
 
   def update
-    redirect_to action: :index unless current_user.id == @item.user_id
+    
     
     if @item.update(item_params)
       redirect_to item_path(@item.id)
@@ -47,9 +48,15 @@ class ItemsController < ApplicationController
 
   private
 
-   before_action :set_item,only: [:show,:edit,:update]
-
+   
   def set_item
     @item = Item.find(params[:id])
   end
+
+  def set_item_user
+    redirect_to action: :index unless current_user.id == @item.user_id
+  end
+
+
+
 end
